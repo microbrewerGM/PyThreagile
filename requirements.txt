@@ -3,3 +3,4 @@ uvicorn
 pydantic0
 pyyaml
 pytest
+pytest-asyncio

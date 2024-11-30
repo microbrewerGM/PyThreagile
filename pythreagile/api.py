@@ -1,9 +1,9 @@
 # pythreagile/api.py
 
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
 from pythreagile.models.generator import ModelGenerator
 from pythreagile.models.validator import ModelValidator
+from pydantic import BaseModel
 
 app = FastAPI(
     title="PyThreagile API",
@@ -21,31 +21,28 @@ app = FastAPI(
 )
 
 class GenerateModelRequest(BaseModel):
-    model_type: str  # 'stub' or 'example'
-
-class ValidateModelRequest(BaseModel):
-    model_file: dict  # This should accept a dictionary
+    model_type: dict
 
 @app.post("/generate/")
 async def generate_model_endpoint(request: GenerateModelRequest):
     """Generate a model (stub or example) and return the model data."""
     try:
-        model_type = request.model_type.lower()
+        model_type = request.get("model_type", "").lower()  # Access the model_type from the dictionary
         generator = ModelGenerator()
 
         if model_type == "stub":
             model_data = generator.create_stub_model()  # Modify this method to return data instead of saving
-            return {"message": "Stub model generated successfully.", "model": model_data}
+            return {"status": "success", "model": model_data}
         elif model_type == "example":
             model_data = generator.create_example_model()  # Modify this method to return data instead of saving
-            return {"message": "Example model generated successfully.", "model": model_data}
+            return {"status": "success", "model": model_data}
         else:
             raise HTTPException(status_code=400, detail="Invalid model type. Use 'stub' or 'example'.")
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
 @app.post("/validate/")
-async def validate_model_endpoint(schema_data: dict, request: ValidateModelRequest):
+async def validate_model_endpoint(schema_data: dict, request: dict):
     """Validate a model file and return validation results."""
     try:
         validator = ModelValidator(schema=schema_data)
