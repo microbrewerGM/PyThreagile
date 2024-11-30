@@ -1,0 +1,96 @@
+.DS_Store
+non-api-code/
+
+# Byte-compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables and secrets
+.env
+.env.*
+
+# Virtual environment
+.venv/
+env/
+venv/
+
+# Dependency directories
+.eggs/
+.eggs-info/
+*.egg-info/
+dist/
+build/
+pip-wheel-metadata/
+
+# IDE/editor-specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# Logs and debugging output
+*.log
+*.out
+*.err
+logs/
+debug/
+*.cover
+coverage/
+
+# Pytest cache
+.pytest_cache/
+.cache/
+
+# FastAPI specific
+# Temporary upload files (if used for file uploads)
+uploads/
+staticfiles/
+mediafiles/
+
+# Pydantic specific
+# If using Pydantic's model generation or cached builds
+*.schema.json
+
+# Docker-specific (if using Docker for deployment)
+Dockerfile
+*.dockerfile
+docker-compose.yml
+docker-compose.override.yml
+*.log
+tmp/
+.dockerignore
+
+# Cache files
+*.mypy_cache/
+.dmypy.json
+mypy.ini
+
+# Jupyter Notebook checkpoints (if notebooks are used)
+.ipynb_checkpoints/
+
+# Configuration backups
+*.bak
+*.orig
+*.old
+
+# Local configuration
+*.local
+*.config
+
+# MacOS-specific files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows-specific files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# System-specific files
+*.~lock.*
+*.part
+*.~undo

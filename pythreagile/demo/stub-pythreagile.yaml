@@ -1,0 +1,166 @@
+pythreagile_version: 0.0.1
+title: Model Stub
+date: '2024-11-29'
+author:
+  name: John Doe
+  homepage: www.example.com
+management_summary_comment: Just some <b>more</b> custom summary possible here...
+business_criticality: important
+business_overview:
+  description: Some more <i>demo text</i> here and even images...
+  images: []
+technical_overview:
+  description: Some more <i>demo text</i> here and even images...
+  images: []
+questions:
+  Some question without an answer?: ''
+  Some question with an answer?: Some answer
+abuse_cases:
+  Some Abuse Case: Some Description
+security_requirements:
+  Some Security Requirement: Some Description
+tags_available:
+- some-tag
+- some-other-tag
+data_assets:
+  Some Data Asset:
+    id: some-data
+    description: Some Description
+    usage: business
+    tags: null
+    origin: Some Origin
+    owner: Some Owner
+    quantity: many
+    confidentiality: confidential
+    integrity: critical
+    availability: operational
+    justification_cia_rating: Some Justification
+technical_assets:
+  Some Technical Asset:
+    id: some-component
+    description: Some Description
+    type: process
+    usage: business
+    used_as_client_by_human: false
+    out_of_scope: false
+    justification_out_of_scope: null
+    size: component
+    technology: web-service-rest
+    tags:
+    - some-tag
+    - some-other-tag
+    internet: false
+    machine: virtual
+    encryption: none
+    owner: Some Owner
+    confidentiality: confidential
+    integrity: critical
+    availability: critical
+    justification_cia_rating: Some Justification
+    multi_tenant: false
+    redundant: false
+    custom_developed_parts: true
+    data_assets_processed:
+    - some-data
+    data_assets_stored: null
+    data_formats_accepted:
+    - xml
+    communication_links:
+      Some Traffic:
+        target: some-other-component
+        description: Some Description
+        protocol: https
+        authentication: none
+        authorization: none
+        tags: null
+        vpn: false
+        ip_filtered: false
+        readonly: false
+        usage: business
+        data_assets_sent:
+        - some-data
+        data_assets_received: null
+  Some Other Tecnical Asset:
+    id: some-other-component
+    description: Some Description
+    type: process
+    usage: business
+    used_as_client_by_human: false
+    out_of_scope: false
+    justification_out_of_scope: null
+    size: component
+    technology: web-service-rest
+    tags:
+    - some-tag
+    - some-other-tag
+    internet: false
+    machine: virtual
+    encryption: none
+    owner: Some Owner
+    confidentiality: confidential
+    integrity: critical
+    availability: critical
+    justification_cia_rating: Some Justification
+    multi_tenant: false
+    redundant: false
+    custom_developed_parts: true
+    data_assets_processed:
+    - some-data
+    data_assets_stored: null
+    data_formats_accepted:
+    - xml
+    communication_links: {}
+trust_boundaries:
+  Some Trust Boundary:
+    id: some-network
+    description: Some Description
+    type: network-dedicated-hoster
+    tags: null
+    technical_assets_inside:
+    - some-component
+    trust_boundaries_nested: null
+shared_runtimes:
+  Some Shared Runtime:
+    id: some-runtime
+    description: Some Description
+    tags: null
+    technical_assets_running:
+    - some-component
+    - some-other-component
+individual_risk_categories:
+  Some Individual Risk Example:
+    id: something-strange
+    description: Some text describing the risk category...
+    impact: Some text describing the impact...
+    asvs: V0 - Something Strange
+    cheat_sheet: https://example.com
+    action: Some text describing the action...
+    mitigation: Some text describing the mitigation...
+    check: Check if XYZ...
+    function: business-side
+    stride: repudiation
+    detection_logic: Some text describing the detection logic...
+    risk_assessment: Some text describing the risk assessment...
+    false_positives: Some text describing the most common types of false positives...
+    model_failure_possible_reason: false
+    cwe: 693
+    risks_identified:
+      <b>Example Individual Risk</b> at <b>Some Technical Asset</b>:
+        severity: critical
+        exploitation_likelihood: likely
+        exploitation_impact: medium
+        data_breach_probability: probable
+        data_breach_technical_assets:
+        - some-component
+        most_relevant_data_asset: null
+        most_relevant_technical_asset: some-component
+        most_relevant_communication_link: null
+        most_relevant_trust_boundary: null
+        most_relevant_shared_runtime: null
+risk_tracking:
+  unencrypted-asset@some-component:
+    status: accepted
+    justification: Risk accepted as tolerable
+    ticket: XYZ-1234
+    date: '2020-01-04'
+    checked_by: John Doe

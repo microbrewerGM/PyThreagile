@@ -1,0 +1,5 @@
+fastapi
+uvicorn
+pydantic0
+pyyaml
+pytest

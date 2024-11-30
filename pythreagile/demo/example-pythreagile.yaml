@@ -1,0 +1,139 @@
+pythreagile_version: 0.0.1
+title: Some Example Application
+author:
+  name: John Doe
+  homepage: www.example.com
+date: '2024-11-29'
+business_overview:
+  description: Some more <i>demo text</i> here and even images...
+technical_overview:
+  description: Some more <i>demo text</i> here and even images...
+business_criticality: important
+management_summary_comment: Just some <b>more</b> custom summary possible here...
+security_requirements:
+  EU-DSGVO: Mandatory EU-Datenschutzgrundverordnung
+  Input Validation: Strict input validation is required to reduce the overall attack
+    surface.
+  Securing Administrative Access: Administrative access must be secured with strong
+    encryption and multi-factor authentication.
+questions:
+  How are the admin clients managed/protected against compromise?: ''
+  How are the build pipeline components managed/protected against compromise?: Managed
+    by XYZ
+  How are the development clients managed/protected against compromise?: Managed by
+    XYZ
+abuse_cases:
+  CPU-Cycle Theft: As a hacker I want to steal CPU cycles in order to transform them
+    into money via installed crypto currency miners.
+  Contract Filesystem Compromise: As a hacker I want to access the filesystem storing
+    the contract PDFs in order to steal/modify contract data.
+  Cross-Site Scripting Attacks: As a hacker I want to execute Cross-Site Scripting
+    (XSS) and similar attacks in order to takeover victim sessions and cause reputational
+    damage.
+  Database Compromise: As a hacker I want to access the database backend of the ERP-System
+    in order to steal/modify sensitive business data.
+  Identity Theft: As a hacker I want to steal identity data in order to reuse credentials
+    and/or keys on other targets of the same company or outside.
+  PII Theft: As a hacker I want to steal PII (Personally Identifiable Information)
+    data in order to blackmail the company and/or damage their repudiation by publishing
+    them.
+  Ransomware: As a hacker I want to encrypt the storage and file systems in order
+    to demand ransom.
+tags_available:
+- linux
+- apache
+- mysql
+- jboss
+- keycloak
+- jenkins
+- git
+- oracle
+- some-erp
+- vmware
+- aws
+- aws:ec2
+- aws:s3
+data_assets:
+  build-job-config:
+    id: build-job-config
+    title: Build Job Config
+    description: Data for customizing of the build job system.
+    usage: devops
+    origin: Company XYZ
+    owner: Company XYZ
+    confidentiality: restricted
+    integrity: critical
+    availability: operational
+    justification_cia_rating: Data for customizing of the build job system.
+  client-application-code:
+    id: client-application-code
+    title: Client Application Code
+    description: Angular and other client-side code delivered by the application.
+    usage: devops
+    origin: Company ABC
+    owner: Company ABC
+    integrity: critical
+    availability: important
+    justification_cia_rating: Client-side application code.
+technical_assets:
+  apache-webserver:
+    id: apache-webserver
+    title: Apache Webserver
+    description: Main web server
+    usage: business
+    size: component
+    technologies:
+    - name: apache
+      description: Apache HTTP Server
+      attributes:
+        web_server: true
+    owner: Company ABC
+    confidentiality: restricted
+    integrity: critical
+    availability: critical
+    justification_cia_rating: Main web server hosting the application
+trust_boundaries:
+  web-dmz:
+    id: web-dmz
+    title: Web DMZ
+    description: Web DMZ
+    type: network-cloud-security-group
+    technical_assets_inside:
+    - apache-webserver
+  application-network:
+    id: application-network
+    title: Application Network
+    description: Application Network
+    type: network-cloud-provider
+    tags:
+    - aws
+    trust_boundaries_nested:
+    - web-dmz
+communication_links:
+  customer-client>customer-traffic:
+    id: customer-client>customer-traffic
+    source_id: customer-client
+    target_id: load-balancer
+    title: Customer Traffic
+    description: Link to the load balancer
+    protocol: https
+    authentication: session-id
+    authorization: end-user-identity-propagation
+    data_assets_sent:
+    - customer-accounts
+    - customer-operational-data
+    data_assets_received:
+    - customer-accounts
+    - customer-operational-data
+    - customer-contracts
+    - client-application-code
+    - marketing-material
+    diagram_tweak_weight: 1
+    diagram_tweak_constraint: true
+shared_runtimes:
+  Some Shared Runtime:
+    id: some-runtime
+    description: Some Description
+    tags: null
+    technical_assets_running:
+    - apache-webserver
