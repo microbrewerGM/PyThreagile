@@ -1,24 +1,24 @@
 from datetime import date
-import yaml
+import json
 from typing import Dict, Any
 from datetime import datetime
 
 class ModelGenerator:
     def __init__(self):
-        self.today = date.today().strftime("%Y-%m-%d")
+        self.current_date = date.today().strftime("%Y-%m-%d")
         self.instance = self
 
     def self(self):
         return self
 
     @staticmethod
-    def today():
+    def get_current_date():
         return datetime.now().strftime("%Y-%m-%d")  # Return today's date as a string in the format YYYY-MM-DD
 
     stub_model = {
         'pythreagile_version': '0.0.1',
         'title': 'Model Stub',
-        'date': today(),
+        'date': get_current_date(),
         'author': {
             'name': 'John Doe',
             'homepage': 'www.example.com'
@@ -211,7 +211,7 @@ class ModelGenerator:
             "name": "John Doe",
             "homepage": "www.example.com"
         },
-        "date": today(),
+        "date": get_current_date(),
         "business_overview": {
             "description": "Some more <i>demo text</i> here and even images..."
         },
@@ -336,6 +336,762 @@ class ModelGenerator:
                 "technical_assets_running": ["apache-webserver"]
             }
         }
+    }
+
+    schema = {
+        "$schema": "https://json-schema.org/draft-2020-12/schema",
+        "id": "file://./schema.json",
+        "title": "PyThreagile",
+        "description": "Agile Threat Modeling (Python version)",
+        "type": "object",
+        "properties": {
+            "includes": {
+                "description": "Include other yaml files into the model",
+                "type": [
+                    "array",
+                    "null"
+                ],
+                "uniqueItems": True,
+                "items": {
+                    "type": "string"
+                }
+            },  
+            "pythreagile_version": {
+                "description": "Version of the PyThreagile",
+                "type": "string"
+            },
+            "title": {
+                "description": "Title of the model",
+                "type": "string"
+            },
+            "date": {
+                "description": "Date of the model",
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "format": "date"
+            },
+            "author": {
+                "description": "Author of the model",
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "description": "Author name",
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                },
+                "contact": {
+                    "description": "Author contact info",
+                    "type": [
+                    "string",
+                    "null"
+                ]
+                },
+                "homepage": {
+                "description": "Author homepage",
+                "type": [
+                    "string",
+                            "null"
+                        ]
+                    }
+                },
+                "required": [
+                    "name"
+                ]
+            },
+            "contributors": {
+                "description": "Contributors to the model",
+                "type": [
+                    "array",
+                    "null"
+                ],
+                "uniqueItems": True,
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "description": "Contributor name",
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "contact": {
+                            "description": "Contributor contact info",
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "homepage": {
+                            "description": "Contributor homepage",
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ]
+                }
+            },
+            "management_summary_comment": {
+                "description": "Individual management summary for the report",
+                "type": [
+                    "string",
+                        "null"
+                ]
+            },
+            "business_criticality": {
+                "description": "Business criticality of the target",
+                "type": "string",
+                "enum": [
+                    "archive",
+                    "operational",
+                    "important",
+                    "critical",
+                    "mission-critical"
+                ]
+            },
+            "application_description": {
+                "description": "General description of the application, its purpose and functionality.",
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "description": "Application description for the report",
+                        "type": [
+                    "string",
+                            "null"
+                        ]
+                    },
+                    "images": {
+                "description": "Application images for the report",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "uniqueItems": True
+                    }
+                }
+            },
+            "business_overview": {
+                "description": "Individual business overview for the report",
+                "type": "object",
+                "properties": {
+                    "description": {
+                "description": "Individual business overview for the report",
+                "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "images": {
+                "description": "Custom images for the report",
+                    "type": [
+                        "array",
+                        "null"
+                    ],
+                        "uniqueItems": True
+                    }
+                }
+            },
+            "technical_overview": {
+                "description": "Individual technical overview for the report",
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "description": "Individual technical overview for the report",
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "images": {
+                        "description": "Custom images for the report",
+                        "type": [
+                            "array",
+                                "null"
+                        ],
+                        "uniqueItems": True
+                    }
+                }
+            },
+            "questions": {
+                "description": "Custom questions for the report",
+                "type": [
+                    "object",
+                    "null"
+                ],
+                "uniqueItems": True
+            },
+            "abuse_cases": {
+                "description": "Custom abuse cases for the report",
+                "type": [
+                "object",
+                "null"
+                ],
+                "uniqueItems": True
+            },
+            "security_requirements": {
+                "description": "Custom security requirements for the report",
+                "type": [
+                    "object",
+                    "null"
+                ],
+                "uniqueItems": True
+            },
+            "tags_available": {
+                "description": "Tags available",
+                "type": [
+                    "array",
+                    "null"
+                ],
+                "uniqueItems": True,
+                "items": {
+                    "type": "string"
+                }
+            },
+            "data_assets": {
+                "description": "Data assets",
+                "type": "object",
+                "uniqueItems": True,
+                "additionalProperties": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "description": "ID",
+                            "type": "string"
+                        },
+                        "description": {
+                            "description": "Description",
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "usage": {
+                            "description": "Usage",
+                            "type": "string",
+                            "enum": [
+                                "business",
+                                "devops"
+                            ]
+                        },
+                        "tags": {
+                            "description": "Tags",
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "uniqueItems": True,
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "origin": {
+                            "description": "Origin",
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "owner": {
+                            "description": "Owner",
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "quantity": {
+                            "description": "Quantity",
+                            "type": "string",
+                            "enum": [
+                                "very-few",
+                                "few",
+                                "many",
+                                "very-many"
+                            ]
+                        },
+                        "confidentiality": {
+                            "description": "Confidentiality",
+                            "type": "string",
+                            "enum": [
+                                "public",
+                                "internal",
+                                "restricted",
+                                "confidential",
+                                "strictly-confidential"
+                            ]
+                        },
+                        "integrity": {
+                            "description": "Integrity",
+                            "type": "string",
+                            "enum": [
+                                "archive",
+                                "operational",
+                                "important",
+                                "critical",
+                                "mission-critical"
+                            ]
+                        },
+                        "availability": {
+                            "description": "Availability",
+                            "type": "string",
+                            "enum": [
+                                "archive",
+                                "operational",
+                                "important",
+                                "critical",
+                                "mission-critical"
+                            ]
+                        },
+                        "justification_cia_rating": {
+                            "description": "Justification of the rating",
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "id",
+                        "description",
+                        "usage",
+                        "quantity",
+                        "confidentiality",
+                        "integrity",
+                        "availability"
+                    ]
+                }
+            },
+            "trust_boundaries": {
+                "description": "Trust boundaries",
+                "type": "object",
+                "uniqueItems": True,
+                "additionalProperties": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "description": "ID",
+                            "type": "string"
+                        },
+                        "description": {
+                            "description": "Description",
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "type": {
+                            "description": "Type",
+                            "type": "string",
+                            "enum": [
+                                "network-on-prem",
+                                "network-dedicated-hoster",
+                                "network-virtual-lan",
+                                "network-cloud-provider",
+                                "network-cloud-security-group",
+                                "network-policy-namespace-isolation",
+                                "execution-environment"
+                            ]
+                        },
+                        "tags": {
+                            "description": "Tags",
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "uniqueItems": True,
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "technical_assets_inside": {
+                            "description": "Technical assets inside",
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "uniqueItems": True,
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "trust_boundaries_nested": {
+                            "description": "Trust boundaries nested",
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "uniqueItems": True,
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "required": [
+                        "id",
+                        "description",
+                        "type",
+                        "technical_assets_inside",
+                        "trust_boundaries_nested"
+                    ]
+                }
+            },
+            "shared_runtimes": {
+                "description": "Shared runtimes",
+                "type": "object",
+                "uniqueItems": True,
+                "additionalProperties": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "description": "ID",
+                            "type": "string"
+                        },
+                        "description": {
+                            "description": "Description",
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "tags": {
+                            "description": "Tags",
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "uniqueItems": True,
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "technical_assets_running": {
+                            "description": "Technical assets running",
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "uniqueItems": True,
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "id",
+                            "description",
+                            "technical_assets_running"
+                        ]
+                    }
+                }
+            },
+            "individual_risk_categories": {
+                "description": "Individual risk categories",
+                "type": [
+                    "object",
+                    "null"
+                ],
+                "uniqueItems": True,
+                "additionalProperties": {
+                    "type": "object",
+                    "properties": {
+                        "status": {
+                            "description": "Status",
+                            "type": "string",
+                            "enum": [
+                                "unchecked",
+                                "in-discussion",
+                                "accepted",
+                                "in-progress",
+                                "mitigated",
+                                "false-positive"
+                            ]
+                        },
+                        "justification": {
+                            "description": "Justification",
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "ticket": {
+                            "description": "Ticket",
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "id": {
+                            "description": "ID",
+                            "type": "string"
+                        },
+                        "description": {
+                            "description": "Description",
+                        "type": [
+                            "string",
+                                "null"
+                            ]
+                        },
+                        "impact": {
+                            "description": "Impact",
+                            "type": "string"
+                        },
+                        "asvs": {
+                            "description": "ASVS",
+                            "type": "string"
+                        }, 
+                        "cheat_sheet": {
+                            "description": "Cheat sheet",
+                            "type": "string"
+                        },
+                        "action": {
+                            "description": "Action",
+                            "type": "string"
+                        },
+                        "mitigation": {
+                            "description": "Mitigation",
+                            "type": "string"
+                        },
+                        "check": {
+                            "description": "Check",
+                            "type": "string"
+                        },
+                        "function": {
+                            "description": "Function",
+                            "type": "string",
+                            "enum": [
+                                "business-side",
+                                "architecture",
+                                "development",
+                                "operations"
+                            ]
+                        },
+                        "stride": {
+                            "description": "STRIDE",
+                            "type": "string",
+                            "enum": [
+                                "spoofing",
+                                "tampering",
+                                "repudiation",
+                                "information-disclosure",
+                                "denial-of-service",
+                                "elevation-of-privilege"
+                            ]
+                        },
+                        "detection_logic": {
+                            "description": "Detection logic",
+                            "type": "string"
+                        },
+                        "risk_assessment": {
+                            "description": "Risk assessment",
+                            "type": "string"
+                        },
+                        "false_positives": {
+                            "description": "False positives",
+                            "type": "string"
+                        },
+                        "model_failure_possible_reason": {
+                            "description": "Model failure possible reason",
+                            "type": "boolean"
+                        },
+                        "cwe": {
+                            "description": "CWE",
+                            "type": "integer"
+                        },
+                        "risks_identified": {
+                            "description": "Risks identified",
+                            "type": "object",
+                            "uniqueItems": True,
+                            "additionalProperties": {
+                                "type": "object",
+                                "properties": {
+                                    "severity": {
+                                        "description": "Severity",
+                                        "type": "string",
+                                        "enum": [
+                                            "low",
+                                            "medium",
+                                            "elevated",
+                                            "high",
+                                            "critical"
+                                        ]
+                                    },
+                                    "exploitation_likelihood": {
+                                        "description": "Exploitation likelihood",
+                                        "type": "string",
+                                        "enum": [
+                                            "unlikely",
+                                            "likely",
+                                            "very-likely",
+                                            "frequent"
+                                        ]
+                                    },
+                                    "exploitation_impact": {
+                                        "description": "Exploitation impact",
+                                        "type": "string",
+                                        "enum": [
+                                            "low",
+                                            "medium",
+                                            "high",
+                                            "very-high"
+                                        ]
+                                    },
+                                    "data_breach_probability": {
+                                        "description": "Data breach probability",
+                                        "type": "string",
+                                        "enum": [
+                                            "improbable",
+                                            "possible",
+                                            "probable"
+                                        ]
+                                    },
+                                    "data_breach_technical_assets": {
+                                        "description": "Data breach technical assets",
+                                        "type": [
+                                            "array",
+                                            "null"
+                                        ],
+                                        "uniqueItems": True,
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "most_relevant_data_asset": {
+                                        "description": "Most relevant data asset",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ]
+                                    },
+                                    "most_relevant_technical_asset": {
+                                        "description": "Most relevant technical asset",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ]
+                                    },
+                                    "most_relevant_communication_link": {
+                                        "description": "Most relevant communication link",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ]
+                                    },
+                                    "most_relevant_trust_boundary": {
+                                        "description": "Most relevant trust boundary",
+                                        "type": [
+                                            "string",
+                                                "null"
+                                        ]
+                                    },
+                                    "most_relevant_shared_runtime": {
+                                        "description": "Most relevant shared runtime",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "required": [
+                            "id",
+                            "description",
+                            "impact",
+                            "asvs",
+                            "cheat_sheet",
+                            "action",
+                            "mitigation",
+                            "check",
+                            "function",
+                            "stride",
+                            "detection_logic",
+                            "risk_assessment",
+                            "false_positives",
+                            "model_failure_possible_reason",
+                            "cwe",
+                            "risks_identified"
+                        ]
+                    }
+                }
+            },
+            "risk_tracking": {
+                "description": "Risk tracking",
+                "type": [
+                    "object",
+                    "null"
+                ],
+                "uniqueItems": True,
+                "additionalProperties": {
+                    "type": "object",
+                    "properties": {
+                        "status": {
+                            "description": "Status",
+                            "type": "string",
+                            "enum": [
+                                "unchecked",
+                                "in-discussion",
+                                "accepted",
+                                "in-progress",
+                                "mitigated",
+                                "false-positive"
+                            ]
+                        },
+                        "justification": {
+                            "description": "Justification",
+                            "type": [
+                                 "string",
+                                "null"
+                            ]
+                        },
+                        "ticket": {
+                            "description": "Ticket",
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "date": {
+                            "description": "Date",
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "format": "date"
+                        },
+                        "checked_by": {
+                            "description": "Checked by",
+                            "type": [
+                            "string",
+                                "null"
+                            ]
+                        },
+                        "required": [
+                            "status",
+                            "justification",
+                            "ticket",
+                            "date",
+                            "checked_by"
+                        ]
+                    }
+                }
+            }
+        },
+        "required": [
+            "pythreagile_version",
+            "title",
+            "author",
+            "business_criticality",
+            "tags_available",
+            "data_assets",
+            "technical_assets",
+            "shared_runtimes"
+        ]
     }
 
     def _create_technical_asset(self, asset_id: str, data_assets: list, communication_links: dict) -> dict:

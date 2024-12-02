@@ -27,13 +27,14 @@ class ValidationError(Exception):
 class ModelValidator:
     def __init__(self, schema: dict):
         self.schema = schema
+        # print(self.schema)
 
     def validate(self, model_data: dict) -> List[str]:
         """Validate the model against the schema"""
         errors = []
-
+        # print(model_data)
         # Check required top-level fields from schema
-        required_fields = self.schema.get('required', [])
+        required_fields = self.schema.get('required')
         for field in required_fields:
             if field not in model_data:
                 errors.append(f"Missing required field: {field}")
